@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286171642129",
+    "project_id": "testapplicatoin",
+    "storage_bucket": "testapplicatoin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286171642129:android:a1971075dfa01a4dc4f4b0",
+        "android_client_info": {
+          "package_name": "com.example.ynikit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABJ--PTdYbLMIUUncM4FNKZei8NFMhqYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

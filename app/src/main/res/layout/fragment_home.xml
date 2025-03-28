@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.home.HomeFragment">
+
+    <!-- ScrollView для прокрутки всего содержимого -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Заголовок -->
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="09.02.07 Информационные системы и программирование"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Картинка -->
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_college_logo"
+                android:contentDescription="Логотип колледжа"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Основной текст с возможностью прокрутки -->
+            <TextView
+                android:id="@+id/contentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/large_text_about_speciality"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/logoImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Кнопки действий -->
+            <Button
+                android:id="@+id/materialsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Материалы"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#174f94"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/contentTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/testButton"
+                app:layout_constraintWidth_percent="0.48"/>
+
+            <Button
+                android:id="@+id/testButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Тест"
+                android:backgroundTint="#174f94"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/contentTextView"
+                app:layout_constraintStart_toEndOf="@id/materialsButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent="0.48"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
