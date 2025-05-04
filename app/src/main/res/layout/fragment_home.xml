@@ -26,9 +26,9 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="09.02.07 Информационные системы и программирование"
+                android:text="@string/code"
                 android:textSize="24sp"
-                android:textStyle="bold"
+
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginBottom="16dp"
