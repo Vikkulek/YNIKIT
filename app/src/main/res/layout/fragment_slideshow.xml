@@ -4,19 +4,670 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.slideshow.SlideshowFragment">
 
-    <TextView
-        android:id="@+id/text_slideshow"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/TestFoAbiturient"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Вопрос 1 -->
+            <TextView
+                android:id="@+id/question1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1. Что такое алгоритм?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question1">
+
+                <RadioButton
+                    android:id="@+id/answer1A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Это набор случайных действий"/>
+
+                <RadioButton
+                    android:id="@+id/answer1B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Это последовательность четких шагов для решения задачи"/>
+
+                <RadioButton
+                    android:id="@+id/answer1C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Это название языка программирования"/>
+
+                <RadioButton
+                    android:id="@+id/answer1D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Это устройство компьютера"/>
+            </RadioGroup>
+
+            <!-- Вопрос 2 -->
+            <TextView
+                android:id="@+id/question2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2. Какой результат будет у выражения 5 + 3 * 2?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup1"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question2">
+
+                <RadioButton
+                    android:id="@+id/answer2A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) 16"/>
+
+                <RadioButton
+                    android:id="@+id/answer2B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) 11"/>
+
+                <RadioButton
+                    android:id="@+id/answer2C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) 13"/>
+
+                <RadioButton
+                    android:id="@+id/answer2D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) 10"/>
+            </RadioGroup>
+
+            <!-- Вопрос 3 -->
+            <TextView
+                android:id="@+id/question3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3. Что делает оператор if в программировании?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup2"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question3">
+
+                <RadioButton
+                    android:id="@+id/answer3A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Повторяет действие несколько раз"/>
+
+                <RadioButton
+                    android:id="@+id/answer3B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Проверяет условие и выполняет код, если оно верно"/>
+
+                <RadioButton
+                    android:id="@+id/answer3C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Выводит текст на экран"/>
+
+                <RadioButton
+                    android:id="@+id/answer3D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Создает переменную"/>
+            </RadioGroup>
+
+            <!-- Вопрос 4 -->
+            <TextView
+                android:id="@+id/question4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4. Какой язык программирования используется для создания веб-страниц?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup3"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question4">
+
+                <RadioButton
+                    android:id="@+id/answer4A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Python"/>
+
+                <RadioButton
+                    android:id="@+id/answer4B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) HTML"/>
+
+                <RadioButton
+                    android:id="@+id/answer4C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Java"/>
+
+                <RadioButton
+                    android:id="@+id/answer4D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) C++"/>
+            </RadioGroup>
+
+            <!-- Вопрос 5 -->
+            <TextView
+                android:id="@+id/question5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5. Что такое переменная в программировании?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup4"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question5">
+
+                <RadioButton
+                    android:id="@+id/answer5A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Это неизменяемое значение"/>
+
+                <RadioButton
+                    android:id="@+id/answer5B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Это контейнер для хранения данных"/>
+
+                <RadioButton
+                    android:id="@+id/answer5C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Это ошибка в программе"/>
+
+                <RadioButton
+                    android:id="@+id/answer5D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Это название файла"/>
+            </RadioGroup>
+
+            <!-- Вопрос 6 -->
+            <TextView
+                android:id="@+id/question6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="6. Какой закон физики описывает силу тока в цепи?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup5"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question6">
+
+                <RadioButton
+                    android:id="@+id/answer6A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Закон Ома"/>
+
+                <RadioButton
+                    android:id="@+id/answer6B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Закон Ньютона"/>
+
+                <RadioButton
+                    android:id="@+id/answer6C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Закон Архимеда"/>
+
+                <RadioButton
+                    android:id="@+id/answer6D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Закон Паскаля"/>
+            </RadioGroup>
+
+            <!-- Вопрос 7 -->
+            <TextView
+                android:id="@+id/question7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="7. Что выведет программа: print(10 % 3)?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup6"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question7">
+
+                <RadioButton
+                    android:id="@+id/answer7A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) 3"/>
+
+                <RadioButton
+                    android:id="@+id/answer7B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) 1"/>
+
+                <RadioButton
+                    android:id="@+id/answer7C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) 0"/>
+
+                <RadioButton
+                    android:id="@+id/answer7D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) 10"/>
+            </RadioGroup>
+
+            <!-- Вопрос 8 -->
+            <TextView
+                android:id="@+id/question8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="8. Какой тип данных используется для целых чисел?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup7"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question8">
+
+                <RadioButton
+                    android:id="@+id/answer8A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) float"/>
+
+                <RadioButton
+                    android:id="@+id/answer8B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) string"/>
+
+                <RadioButton
+                    android:id="@+id/answer8C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) boolean"/>
+
+                <RadioButton
+                    android:id="@+id/answer8D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) integer"/>
+            </RadioGroup>
+
+            <!-- Вопрос 9 -->
+            <TextView
+                android:id="@+id/question9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="9. Что такое двоичная система счисления?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup8"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question9">
+
+                <RadioButton
+                    android:id="@+id/answer9A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Система, где используются цифры 0 и 1"/>
+
+                <RadioButton
+                    android:id="@+id/answer9B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Система с основанием 10"/>
+
+                <RadioButton
+                    android:id="@+id/answer9C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Система для работы с дробями"/>
+
+                <RadioButton
+                    android:id="@+id/answer9D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Система для записи текста"/>
+            </RadioGroup>
+
+            <!-- Вопрос 10 -->
+            <TextView
+                android:id="@+id/question10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10. Какой геометрический объект описывается уравнением x² + y² = r²?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup9"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question10">
+
+                <RadioButton
+                    android:id="@+id/answer10A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Прямая"/>
+
+                <RadioButton
+                    android:id="@+id/answer10B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Парабола"/>
+
+                <RadioButton
+                    android:id="@+id/answer10C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Окружность"/>
+
+                <RadioButton
+                    android:id="@+id/answer10D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Куб"/>
+            </RadioGroup>
+
+            <!-- Вопрос 11 -->
+            <TextView
+                android:id="@+id/question11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11. Какой оператор используется для сравнения чисел?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup10"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question11">
+
+                <RadioButton
+                    android:id="@+id/answer11A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) = (присваивание)"/>
+
+                <RadioButton
+                    android:id="@+id/answer11B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) == (проверка равенства)"/>
+
+                <RadioButton
+                    android:id="@+id/answer11C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) +"/>
+
+                <RadioButton
+                    android:id="@+id/answer11D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) *"/>
+            </RadioGroup>
+
+            <!-- Вопрос 12 -->
+            <TextView
+                android:id="@+id/question12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12. Что делает цикл for?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup11"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question12">
+
+                <RadioButton
+                    android:id="@+id/answer12A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Выполняет код один раз"/>
+
+                <RadioButton
+                    android:id="@+id/answer12B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Повторяет код заданное число раз"/>
+
+                <RadioButton
+                    android:id="@+id/answer12C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Выводит случайные числа"/>
+
+                <RadioButton
+                    android:id="@+id/answer12D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Останавливает программу"/>
+            </RadioGroup>
+
+            <!-- Вопрос 13 -->
+            <TextView
+                android:id="@+id/question13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13. Какая формула описывает скорость (v)?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup12"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question13">
+
+                <RadioButton
+                    android:id="@+id/answer13A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) v = s * t"/>
+
+                <RadioButton
+                    android:id="@+id/answer13B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) v = s / t"/>
+
+                <RadioButton
+                    android:id="@+id/answer13C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) v = t / s"/>
+
+                <RadioButton
+                    android:id="@+id/answer13D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) v = s + t"/>
+            </RadioGroup>
+
+            <!-- Вопрос 14 -->
+            <TextView
+                android:id="@+id/question14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14. Что такое функция в программировании?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup13"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question14">
+
+                <RadioButton
+                    android:id="@+id/answer14A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Это название файла"/>
+
+                <RadioButton
+                    android:id="@+id/answer14B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) Это блок кода, который можно вызывать по имени"/>
+
+                <RadioButton
+                    android:id="@+id/answer14C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Это ошибка в программе"/>
+
+                <RadioButton
+                    android:id="@+id/answer14D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Это тип данных"/>
+            </RadioGroup>
+
+            <!-- Вопрос 15 -->
+            <TextView
+                android:id="@+id/question15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="15. Какой язык программирования начинается с буквы «P» и часто используется для обучения?"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup14"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/question15">
+
+                <RadioButton
+                    android:id="@+id/answer15A"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="A) Java"/>
+
+                <RadioButton
+                    android:id="@+id/answer15B"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="B) C#"/>
+
+                <RadioButton
+                    android:id="@+id/answer15C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="C) Python"/>
+
+                <RadioButton
+                    android:id="@+id/answer15D"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D) Ruby"/>
+            </RadioGroup>
+
+            <!-- Кнопка проверки -->
+            <Button
+                android:id="@+id/checkButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Проверить результаты"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/resultTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Результаты -->
+            <TextView
+                android:id="@+id/resultTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup15"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

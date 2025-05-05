@@ -3,20 +3,198 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     >
 
-    <TextView
-        android:id="@+id/text_gallery"
+    <!-- ScrollView для прокрутки всего содержимого -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <!-- Заголовок -->
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/description_of_the_educational_program"
+                android:textSize="24sp"
+
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Картинка -->
+
+            <ImageView
+                android:id="@+id/PresentationImageView"
+                android:layout_width="333dp"
+                android:layout_height="189dp"
+                android:contentDescription="Логотип колледжа"
+                android:src="@drawable/img_1"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+            <TextView
+                android:id="@+id/NameOfTitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NameOfTitle1"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/PresentationImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <!-- Основной текст с возможностью прокрутки -->
+            <TextView
+                android:id="@+id/contentISP01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_01"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/NameOfTitle1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_02"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP01"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_03"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP02"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_04"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP03"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_05"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/NameOfTitle2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NameOfTitle2"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_06"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/NameOfTitle2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/NameOfTitle3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/NameOfTitle3"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/contentISP06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP07"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/information_of_ISP_07"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/NameOfTitle3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,11 +19,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        // Задержка 3 секунды перед переходом на LoginActivity
+        // Задержка 2 секунды перед переходом на LoginActivity
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-            finish() // Закрываем MainActivity
-        }, 3000) // 3000 миллисекунд = 3 секунды
+            finish()
+        }, 2000) // 1000 миллисекунд = 1 секунда
     }
 }
