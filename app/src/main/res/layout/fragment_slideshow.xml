@@ -31,6 +31,32 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
+            <ImageView
+                android:id="@+id/TestImageView"
+                android:layout_width="200dp"
+                android:layout_height="116dp"
+                android:layout_marginTop="20dp"
+                android:contentDescription="картинка для теста"
+                android:src="@drawable/test"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+            <TextView
+                android:id="@+id/contentTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="4dp"
+                android:text="@string/TxtFoAbiturient"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TestImageView" />
+
 
             <!-- Вопрос 1 -->
             <TextView
@@ -40,7 +66,7 @@
                 android:text="1. Что такое алгоритм?"
                 android:textSize="18sp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/titleTextView"/>
+                app:layout_constraintTop_toBottomOf="@id/contentTextView"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup1"

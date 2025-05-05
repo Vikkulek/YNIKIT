@@ -1,5 +1,6 @@
 package com.example.ynikit.ui.slideshow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ynikit.databinding.FragmentSlideshowBinding
+//import com.example.ynikit.databinding.FragmentTestFoAbiturientBinding
 
 class SlideshowFragment : Fragment() {
 
@@ -50,8 +52,8 @@ class SlideshowFragment : Fragment() {
             val selectedId = radioGroup?.checkedRadioButtonId
 
             if (selectedId != -1 && selectedId != null) {
-                val radioButton = requireView().findViewById<RadioButton>(selectedId)
-                val userAnswer = radioButton.text.toString().substring(0, 1)
+                val radioButton = view?.findViewById<RadioButton>(selectedId)
+                val userAnswer = radioButton?.text?.toString()?.substring(0, 1)
 
                 if (userAnswer == correctAnswers[i-1]) {
                     score++
