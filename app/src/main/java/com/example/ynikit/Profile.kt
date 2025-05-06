@@ -1,8 +1,10 @@
 package com.example.ynikit
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
+import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,16 +28,34 @@ class Profile : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarProfile.toolbar)
 
-        binding.appBarProfile.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+        // Заменяем Snackbar на отправку письма
+        binding.appBarProfile.fab.setOnClickListener {
+            val email = "priem.ukit@mgutm.ru" // Проверьте, нет ли опечаток!
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$email")
+                putExtra(Intent.EXTRA_SUBJECT, "Обращение из приложения")
+                putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения YNIKIT.")
+            }
+
+            // Проверяем, есть ли почтовое приложение
+            if (emailIntent.resolveActivity(packageManager) != null) {
+                startActivity(emailIntent)
+            } else {
+                // Если нет, предлагаем установить Gmail
+                Toast.makeText(this, "Почтовое приложение не найдено", Toast.LENGTH_SHORT).show()
+                val playStoreIntent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse("market://details?id=com.google.android.gm")
+                }
+                if (playStoreIntent.resolveActivity(packageManager) != null) {
+                    startActivity(playStoreIntent)
+                }
+            }
         }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_profile)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
@@ -46,7 +66,6 @@ class Profile : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.profile, menu)
         return true
     }
