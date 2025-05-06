@@ -22,9 +22,9 @@
         android:theme="@style/Theme.YNIKIT"
         tools:targetApi="31">
         <activity
-         android:name=".TestFoAbiturient"
-            android:exported="true" />
-        <!-- FileProvider для работы с файлами -->
+            android:name=".Admin"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -34,16 +34,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name=".TestHistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestResultsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".TestActivity"
-            android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false"

@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)  // Убедитесь, что имя вашего XML файла соответствует
+        setContentView(R.layout.activity_login)
 
         // Инициализация элементов UI
         emailEt = findViewById(R.id.email_et)
@@ -32,29 +32,40 @@ class LoginActivity : AppCompatActivity() {
 
         // Устанавливаем обработчик на кнопку "Login"
         loginBtn.setOnClickListener {
-            val email = emailEt.text.toString()
+            val email = emailEt.text.toString().trim().lowercase() // Приводим к нижнему регистру и убираем пробелы
             val password = passwordEt.text.toString()
 
-            // Проверка на пустые поля
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(applicationContext, "Заполните все поля", Toast.LENGTH_SHORT).show()
-            } else {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            // Успешная авторизация, переходим на MainActivity
-                            startActivity(Intent(this@LoginActivity, Profile::class.java))
-                        } else {
-                            // Ошибка при авторизации
-                            Toast.makeText(applicationContext, "Аккаунт не найден", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Логируем email для отладки
+                        println("🔹 Email пользователя: $email")
+
+                        // Проверяем наличие "adminrole" (в нижнем регистре)
+                        if (email.contains("adminrole")) {
+                            println("🔹 Обнаружен adminrole! Переход на Admin.kt")
+                            startActivity(Intent(this@LoginActivity, Admin::class.java))
+                        } else {
+                            println("🔹 Обычный пользователь. Переход на Profile.kt")
+                            startActivity(Intent(this@LoginActivity, Profile::class.java))
+                        }
+                        finish() // Закрываем LoginActivity
+                    } else {
+                        val error = task.exception?.message ?: "Ошибка авторизации"
+                        Toast.makeText(this, "Ошибка: $error", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
-        // Устанавливаем обработчик на текстовую ссылку для перехода в экран регистрации
-        goToRegisterActivityTv.setOnClickListener {
-            startActivity(Intent(this@LoginActivity, SingUpActivity::class.java))
-        }
+            // Устанавливаем обработчик на текстовую ссылку для перехода в экран регистрации
+            goToRegisterActivityTv.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, SingUpActivity::class.java))
+            }
+
     }
 }
