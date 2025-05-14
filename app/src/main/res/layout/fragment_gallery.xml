@@ -49,6 +49,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/PresentationImageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+            <TextView
+                android:id="@+id/NameOfTitleInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/InfoOn2025"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/youtube_player_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/contentISP01On2025"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#174f94"
+                android:text="@string/Info2025"
+                android:textStyle=""
+                android:clickable="true"
+                android:focusable="true"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintTop_toBottomOf="@id/NameOfTitleInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
             <TextView
                 android:id="@+id/NameOfTitle1"
                 android:layout_width="match_parent"
@@ -58,7 +97,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_marginBottom="16dp"
-                app:layout_constraintTop_toBottomOf="@id/PresentationImageView"
+                app:layout_constraintTop_toBottomOf="@id/contentISP01On2025"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

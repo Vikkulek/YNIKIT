@@ -67,5 +67,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.11.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation ("com.google.code.gson:gson:2.10.1")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
     //implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
 }
