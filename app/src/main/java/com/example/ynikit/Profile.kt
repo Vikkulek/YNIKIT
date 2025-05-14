@@ -28,20 +28,18 @@ class Profile : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarProfile.toolbar)
 
-        // Заменяем Snackbar на отправку письма
+        // Обработчик для кнопки email (fab)
         binding.appBarProfile.fab.setOnClickListener {
-            val email = "priem.ukit@mgutm.ru" // Проверьте, нет ли опечаток!
+            val email = "priem.ukit@mgutm.ru"
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:$email")
                 putExtra(Intent.EXTRA_SUBJECT, "Обращение из приложения")
                 putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения YNIKIT.")
             }
 
-            // Проверяем, есть ли почтовое приложение
             if (emailIntent.resolveActivity(packageManager) != null) {
                 startActivity(emailIntent)
             } else {
-                // Если нет, предлагаем установить Gmail
                 Toast.makeText(this, "Почтовое приложение не найдено", Toast.LENGTH_SHORT).show()
                 val playStoreIntent = Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse("market://details?id=com.google.android.gm")
@@ -49,6 +47,20 @@ class Profile : AppCompatActivity() {
                 if (playStoreIntent.resolveActivity(packageManager) != null) {
                     startActivity(playStoreIntent)
                 }
+            }
+        }
+
+        // Обработчик для кнопки телефона (fab1)
+        binding.appBarProfile.fab1.setOnClickListener {
+            val phoneNumber = "89851979758" // Замените на нужный номер телефона
+            val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:$phoneNumber")
+            }
+
+            if (dialIntent.resolveActivity(packageManager) != null) {
+                startActivity(dialIntent)
+            } else {
+                Toast.makeText(this, "Приложение для звонков не найдено", Toast.LENGTH_SHORT).show()
             }
         }
 
