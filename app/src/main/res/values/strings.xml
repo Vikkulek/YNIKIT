@@ -138,4 +138,7 @@
         <string name="Info2025">
                 <u>Материалы на текущий учебный год</u>
         </string>
+        <string name="Zaregistr">
+        <u>Зарегистрироваться</u>
+        </string>
 </resources>

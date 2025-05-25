@@ -1,9 +1,12 @@
 package com.example.ynikit
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -37,29 +40,25 @@ class Profile : AppCompatActivity() {
                 putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения YNIKIT.")
             }
 
-            if (emailIntent.resolveActivity(packageManager) != null) {
+            try {
                 startActivity(emailIntent)
-            } else {
+            } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this, "Почтовое приложение не найдено", Toast.LENGTH_SHORT).show()
-                val playStoreIntent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("market://details?id=com.google.android.gm")
-                }
-                if (playStoreIntent.resolveActivity(packageManager) != null) {
-                    startActivity(playStoreIntent)
-                }
+                val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://mail.google.com/mail/?view=cm&to=$email"))
+                startActivity(webIntent)
             }
         }
 
         // Обработчик для кнопки телефона (fab1)
         binding.appBarProfile.fab1.setOnClickListener {
-            val phoneNumber = "89851979758" // Замените на нужный номер телефона
+            val phoneNumber = "89851979758"
             val dialIntent = Intent(Intent.ACTION_DIAL).apply {
                 data = Uri.parse("tel:$phoneNumber")
             }
 
-            if (dialIntent.resolveActivity(packageManager) != null) {
+            try {
                 startActivity(dialIntent)
-            } else {
+            } catch (e: ActivityNotFoundException) {
                 Toast.makeText(this, "Приложение для звонков не найдено", Toast.LENGTH_SHORT).show()
             }
         }
@@ -75,6 +74,45 @@ class Profile : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // Добавленный код для работы с nav_header_main.xml
+        setupNavigationHeader()
+    }
+
+    private fun setupNavigationHeader() {
+        // Получаем доступ к header NavigationView
+        val headerView = binding.navView.getHeaderView(0)
+
+        // Находим элементы из nav_header_main.xml
+        val tgIcon = headerView.findViewById<ImageView>(R.id.imageViewTG)
+        val vkIcon = headerView.findViewById<ImageView>(R.id.imageViewVK)
+        val collegeLogo = headerView.findViewById<ImageView>(R.id.imageView)
+        val textView = headerView.findViewById<TextView>(R.id.textView)
+
+        // Установка текста (пример)
+        textView.text = "Добро пожаловать!"
+
+        // Обработка кликов по иконкам
+        tgIcon.setOnClickListener {
+            openUrl("https://t.me/s/ukit_college")
+        }
+
+        vkIcon.setOnClickListener {
+            openUrl("https://vk.com/unikitpage")
+        }
+
+        collegeLogo.setOnClickListener {
+            Toast.makeText(this, "Университетский колледж информационных технологий", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun openUrl(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Не удалось открыть ссылку", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

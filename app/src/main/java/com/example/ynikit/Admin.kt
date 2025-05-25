@@ -1,5 +1,6 @@
 package com.example.ynikit
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,42 +18,30 @@ class Admin : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_admin)
 
-        // Находим кнопку в макете
         val WantBeAdmin: Button = findViewById(R.id.WantBeAdmin)
-        val checkButton: Button = findViewById(R.id.checkButton) // Убедитесь, что у вас есть кнопка с таким id в activity_admin.xml
-        val addInfoButton: Button = findViewById(R.id.addInfoButton) // Если эта кнопка у вас есть
+        val checkButton: Button = findViewById(R.id.checkButton)
+        val addInfoButton: Button = findViewById(R.id.addInfoButton)
+        val checkButtonTable: Button = findViewById(R.id.checkButtonTable)
 
-        // Ссылка для перехода
         val formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfMhIJXW09TJSO9fqp3SByOClLYpx4dYScFrXlRFWMUIG3xIQ/viewform?usp=header"
         val InfoForRedactor = "https://drive.google.com/drive/folders/1Dt04Ab86X9wu9d7JtwdQaHhqrehUCiVI"
-        // Обработчик нажатия на кнопку
+        val checkButtonTableURL = "https://docs.google.com/spreadsheets/d/1fl0d1KfQnqnrOjg69ayagjyJNVYrsBrNUm6CIJGl2_A/edit?resourcekey=&gid=1134262254#gid=1134262254"
+
         checkButton.setOnClickListener {
             openWebPage(formUrl)
         }
-        addInfoButton.setOnClickListener{
-            openInfo(InfoForRedactor)
+
+        addInfoButton.setOnClickListener {
+            openWebPage(InfoForRedactor)
         }
-        WantBeAdmin.setOnClickListener {  val email = "vika.verminskayav@gmail.com" // Проверьте, нет ли опечаток!
-            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:$email")
-                putExtra(Intent.EXTRA_SUBJECT, "Обращение из приложения")
-                putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения YNIKIT. Прошу предоставить мне права администратора")
-            }
 
-            // Проверяем, есть ли почтовое приложение
-            if (emailIntent.resolveActivity(packageManager) != null) {
-                startActivity(emailIntent)
-            } else {
-                // Если нет, предлагаем установить Gmail
-                Toast.makeText(this, "Почтовое приложение не найдено", Toast.LENGTH_SHORT).show()
-                val playStoreIntent = Intent(Intent.ACTION_VIEW).apply {
-                    data = Uri.parse("market://details?id=com.google.android.gm")
-                }
-                if (playStoreIntent.resolveActivity(packageManager) != null) {
-                    startActivity(playStoreIntent)
-                }
-            } }
+        WantBeAdmin.setOnClickListener {
+            sendAdminRequestEmail()
+        }
 
+        checkButtonTable.setOnClickListener {
+            openWebPage(checkButtonTableURL)
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -60,11 +49,56 @@ class Admin : AppCompatActivity() {
         }
     }
 
+    private fun sendAdminRequestEmail() {
+        val email = "vika.verminskayav@gmail.com"
+        val subject = "Обращение из приложения"
+        val body = "Здравствуйте! Я пишу вам из приложения YNIKIT. Прошу предоставить мне права администратора"
 
+        try {
+            // Способ 1: Используем ACTION_SENDTO с mailto (предпочтительный)
+            val mailtoIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, body)
+            }
+
+            // Способ 2: Альтернативный вариант с ACTION_SEND
+            val fallbackIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "message/rfc822"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, body)
+            }
+
+            // Пытаемся использовать mailto сначала
+            try {
+                startActivity(mailtoIntent)
+            } catch (e: ActivityNotFoundException) {
+                // Если не сработало, пробуем общий вариант
+                startActivity(Intent.createChooser(fallbackIntent, "Выберите почтовое приложение"))
+            }
+
+        } catch (e: Exception) {
+            Toast.makeText(this, "Не удалось найти почтовое приложение", Toast.LENGTH_LONG).show()
+
+            // Предлагаем установить Gmail через браузер
+            try {
+                val browserIntent = Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.gm"))
+                startActivity(browserIntent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Установите почтовое приложение (например, Gmail)", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
 
     private fun openWebPage(url: String) {
         try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
+                // Добавляем флаг для нового таска
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             startActivity(intent)
         } catch (e: Exception) {
             Toast.makeText(
@@ -72,18 +106,15 @@ class Admin : AppCompatActivity() {
                 "Не удалось открыть ссылку. Установите браузер.",
                 Toast.LENGTH_LONG
             ).show()
-        }
-    }
-    private fun openInfo(url: String) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        } catch (e: Exception) {
-            Toast.makeText(
-                this,
-                "Не удалось открыть ссылку. Установите браузер.",
-                Toast.LENGTH_LONG
-            ).show()
+
+            // Открываем Play Market для установки браузера
+            try {
+                val marketIntent = Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=com.android.chrome"))
+                startActivity(marketIntent)
+            } catch (e: Exception) {
+                Toast.makeText(this, "Установите браузер (например, Chrome)", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
