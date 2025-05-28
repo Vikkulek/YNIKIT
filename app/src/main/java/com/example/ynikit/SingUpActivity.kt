@@ -18,6 +18,11 @@ class SingUpActivity : AppCompatActivity() {
     private lateinit var passwordEt: EditText
     private lateinit var registerBtn: Button
     private lateinit var goToLoginTv: TextView
+    private lateinit var captchaText: TextView
+    private lateinit var captchaInput: EditText
+    private lateinit var refreshCaptchaBtn: Button
+
+    private var currentCaptcha: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,15 +35,33 @@ class SingUpActivity : AppCompatActivity() {
         passwordEt = findViewById(R.id.password_et)
         registerBtn = findViewById(R.id.sign_up_btn)
         goToLoginTv = findViewById(R.id.backBtn)
+        captchaText = findViewById(R.id.captcha_text)
+        captchaInput = findViewById(R.id.captcha_input)
+        refreshCaptchaBtn = findViewById(R.id.refresh_captcha_btn)
+
+        // Генерация первой капчи
+        generateCaptcha()
+
+        // Обновление капчи
+        refreshCaptchaBtn.setOnClickListener {
+            generateCaptcha()
+        }
 
         registerBtn.setOnClickListener {
             val username = usernameEt.text.toString().trim()
             val email = emailEt.text.toString().trim().lowercase()
             val password = passwordEt.text.toString()
+            val userCaptcha = captchaInput.text.toString()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
+            }
+            // Проверка капчи (теперь всегда)
+            if (userCaptcha != currentCaptcha) {
+                Toast.makeText(this, "Неверная капча", Toast.LENGTH_SHORT).show()
+                generateCaptcha() // Генерируем новую капчу
+                return@setOnClickListener // Не продолжаем авторизацию
             }
 
             auth.createUserWithEmailAndPassword(email, password)
@@ -64,6 +87,7 @@ class SingUpActivity : AppCompatActivity() {
                             "Ошибка: ${task.exception?.message}",
                             Toast.LENGTH_SHORT
                         ).show()
+                        generateCaptcha() // Новая капча при ошибке входа
                     }
                 }
         }
@@ -72,5 +96,14 @@ class SingUpActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+    private fun generateCaptcha() {
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdfghjklmnpqrstuvwxyz23456789"
+        currentCaptcha = (1..4)
+            .map { chars.random() }
+            .joinToString("")
+
+        captchaText.text = currentCaptcha
+        captchaInput.text.clear()
     }
 }

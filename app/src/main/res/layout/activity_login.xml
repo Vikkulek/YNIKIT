@@ -7,10 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:background="@color/white">
+
     <ImageButton
         android:id="@+id/back_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/transparent"
@@ -54,7 +55,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_title">
 
-
         <EditText
             android:id="@+id/email_et"
             android:layout_width="346dp"
@@ -63,8 +63,6 @@
             android:hint="Почта"
             android:inputType="textEmailAddress" />
     </LinearLayout>
-
-
 
     <LinearLayout
         android:id="@+id/password_lin"
@@ -77,47 +75,90 @@
         app:layout_constraintStart_toStartOf="@id/email_lin"
         app:layout_constraintTop_toBottomOf="@id/email_lin">
 
-
         <EditText
             android:id="@+id/password_et"
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Пароль "
+            android:hint="Пароль"
             android:inputType="textPassword" />
     </LinearLayout>
+
+    <!-- НАЧАЛО ДОБАВЛЕННОЙ КАПЧИ (ВИДИМАЯ) -->
+    <LinearLayout
+        android:id="@+id/captcha_layout"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:background="#F5F5F5"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="@id/password_lin"
+        app:layout_constraintTop_toBottomOf="@id/password_lin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Введите капчу:"
+            android:textColor="#333"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/captcha_text"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textColor="#174f94"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+
+
+            <Button
+                android:id="@+id/refresh_captcha_btn"
+                android:layout_width="154dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#174f94"
+                android:text="Обновить"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/captcha_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:hint="Введите текст"
+            android:padding="12dp"/>
+    </LinearLayout>
+    <!-- КОНЕЦ КАПЧИ -->
 
     <Button
         android:id="@+id/login_btn"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:backgroundTint="#174f94"
-
-        android:layout_marginTop="50dp"
-        android:text="Войти"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_lin" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn">
-
-    </LinearLayout>
-
+        android:layout_marginTop="24dp"
+    android:text="Войти"
+    android:textColor="@color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/captcha_layout" /> <!-- Изменил привязку -->
 
     <TextView
         android:id="@+id/go_to_register_activity_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/Zaregistr"
+        android:text="Ещё нет аккаунта? Зарегистрироваться"
         android:textColor="#174f94"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
