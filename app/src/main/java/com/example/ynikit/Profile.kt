@@ -37,7 +37,7 @@ class Profile : AppCompatActivity() {
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:$email")
                 putExtra(Intent.EXTRA_SUBJECT, "Обращение из приложения")
-                putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения YNIKIT.")
+                putExtra(Intent.EXTRA_TEXT, "Здравствуйте! Я пишу вам из приложения УКИТ.")
             }
 
             try {

@@ -52,7 +52,7 @@ class Admin : AppCompatActivity() {
     private fun sendAdminRequestEmail() {
         val email = "vika.verminskayav@gmail.com"
         val subject = "Обращение из приложения"
-        val body = "Здравствуйте! Я пишу вам из приложения YNIKIT. Прошу предоставить мне права администратора"
+        val body = "Здравствуйте! Я пишу вам из приложения УКИТ. Прошу предоставить мне права администратора"
 
         try {
             // Способ 1: Используем ACTION_SENDTO с mailto (предпочтительный)
