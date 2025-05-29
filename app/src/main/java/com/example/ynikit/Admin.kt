@@ -55,40 +55,36 @@ class Admin : AppCompatActivity() {
         val body = "Здравствуйте! Я пишу вам из приложения УКИТ. Прошу предоставить мне права администратора"
 
         try {
-            // Способ 1: Используем ACTION_SENDTO с mailto (предпочтительный)
             val mailtoIntent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email) )
                 putExtra(Intent.EXTRA_SUBJECT, subject)
                 putExtra(Intent.EXTRA_TEXT, body)
             }
 
-            // Способ 2: Альтернативный вариант с ACTION_SEND
             val fallbackIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "message/rfc822"
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email) )
                 putExtra(Intent.EXTRA_SUBJECT, subject)
                 putExtra(Intent.EXTRA_TEXT, body)
             }
 
-            // Пытаемся использовать mailto сначала
             try {
                 startActivity(mailtoIntent)
             } catch (e: ActivityNotFoundException) {
                 // Если не сработало, пробуем общий вариант
-                startActivity(Intent.createChooser(fallbackIntent, "Выберите почтовое приложение"))
+                startActivity(Intent.createChooser(fallbackIntent, "Выберите почтовое приложение(например Яндекс или Chrom)"))
             }
 
         } catch (e: Exception) {
-            Toast.makeText(this, "Не удалось найти почтовое приложение", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Не удалось найти почтовое приложение(", Toast.LENGTH_LONG).show()
 
-            // Предлагаем установить Gmail через браузер
             try {
                 val browserIntent = Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.gm"))
                 startActivity(browserIntent)
             } catch (e: Exception) {
-                Toast.makeText(this, "Установите почтовое приложение (например, Gmail)", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Установите почтовое приложение (например, Gmail ли Яндекс)", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -96,24 +92,22 @@ class Admin : AppCompatActivity() {
     private fun openWebPage(url: String) {
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
-                // Добавляем флаг для нового таска
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             startActivity(intent)
         } catch (e: Exception) {
             Toast.makeText(
                 this,
-                "Не удалось открыть ссылку. Установите браузер.",
+                "Не удалось открыть ссылку(. Установите любой браузер.",
                 Toast.LENGTH_LONG
             ).show()
 
-            // Открываем Play Market для установки браузера
             try {
                 val marketIntent = Intent(Intent.ACTION_VIEW,
                     Uri.parse("market://details?id=com.android.chrome"))
                 startActivity(marketIntent)
             } catch (e: Exception) {
-                Toast.makeText(this, "Установите браузер (например, Chrome)", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Установите браузер (например, Chrome или Яндекс)", Toast.LENGTH_LONG).show()
             }
         }
     }

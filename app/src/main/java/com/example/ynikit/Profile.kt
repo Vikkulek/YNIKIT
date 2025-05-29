@@ -31,7 +31,6 @@ class Profile : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarProfile.toolbar)
 
-        // Обработчик для кнопки email (fab)
         binding.appBarProfile.fab.setOnClickListener {
             val email = "priem.ukit@mgutm.ru"
             val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
@@ -43,7 +42,7 @@ class Profile : AppCompatActivity() {
             try {
                 startActivity(emailIntent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this, "Почтовое приложение не найдено", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Почтовое приложение не найдено(", Toast.LENGTH_SHORT).show()
                 val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://mail.google.com/mail/?view=cm&to=$email"))
                 startActivity(webIntent)
             }
@@ -59,7 +58,7 @@ class Profile : AppCompatActivity() {
             try {
                 startActivity(dialIntent)
             } catch (e: ActivityNotFoundException) {
-                Toast.makeText(this, "Приложение для звонков не найдено", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Приложение для звонков не найдено(", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -75,24 +74,18 @@ class Profile : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        // Добавленный код для работы с nav_header_main.xml
         setupNavigationHeader()
     }
 
     private fun setupNavigationHeader() {
-        // Получаем доступ к header NavigationView
         val headerView = binding.navView.getHeaderView(0)
-
-        // Находим элементы из nav_header_main.xml
         val tgIcon = headerView.findViewById<ImageView>(R.id.imageViewTG)
         val vkIcon = headerView.findViewById<ImageView>(R.id.imageViewVK)
         val collegeLogo = headerView.findViewById<ImageView>(R.id.imageView)
         val textView = headerView.findViewById<TextView>(R.id.textView)
 
-        // Установка текста (пример)
-        textView.text = "Добро пожаловать!"
+        textView.text = "priem.ukit@mgutm.ru"
 
-        // Обработка кликов по иконкам
         tgIcon.setOnClickListener {
             openUrl("https://t.me/s/ukit_college")
         }

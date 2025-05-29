@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Инициализация элементов
         emailEt = findViewById(R.id.email_et)
         passwordEt = findViewById(R.id.password_et)
         loginBtn = findViewById(R.id.login_btn)
@@ -35,38 +34,31 @@ class LoginActivity : AppCompatActivity() {
         captchaInput = findViewById(R.id.captcha_input)
         refreshCaptchaBtn = findViewById(R.id.refresh_captcha_btn)
 
-        // Генерация первой капчи
         generateCaptcha()
 
-        // Обновление капчи
         refreshCaptchaBtn.setOnClickListener {
             generateCaptcha()
         }
 
-        // Обработчик входа
         loginBtn.setOnClickListener {
             val email = emailEt.text.toString().trim().lowercase()
             val password = passwordEt.text.toString()
             val userCaptcha = captchaInput.text.toString()
 
-            // Проверка заполнения полей
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Поля не должны быть пустыми.Заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Проверка капчи (теперь всегда)
             if (userCaptcha != currentCaptcha) {
-                Toast.makeText(this, "Неверная капча", Toast.LENGTH_SHORT).show()
-                generateCaptcha() // Генерируем новую капчу
-                return@setOnClickListener // Не продолжаем авторизацию
+                Toast.makeText(this, "Неверная капча, попробуйте еще раз", Toast.LENGTH_SHORT).show()
+                generateCaptcha()
+                return@setOnClickListener
             }
 
-            // Авторизация через Firebase (только если капча верна)
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // Ваша оригинальная логика перехода
                         if (email.contains("adminrole")) {
                             startActivity(Intent(this@LoginActivity, Admin::class.java))
                         } else {
@@ -74,14 +66,13 @@ class LoginActivity : AppCompatActivity() {
                         }
                         finish()
                     } else {
-                        val error = task.exception?.message ?: "Ошибка авторизации"
+                        val error = task.exception?.message ?: "Ошибка авторизации."
                         Toast.makeText(this, "Ошибка: $error", Toast.LENGTH_SHORT).show()
-                        generateCaptcha() // Новая капча при ошибке входа
+                        generateCaptcha()
                     }
                 }
         }
 
-        // Переход к регистрации
         goToRegisterActivityTv.setOnClickListener {
             startActivity(Intent(this@LoginActivity, SingUpActivity::class.java))
         }

@@ -30,7 +30,7 @@ class SingUpActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        usernameEt = findViewById(R.id.username_et)  // Инициализация поля имени
+        usernameEt = findViewById(R.id.username_et)
         emailEt = findViewById(R.id.email_et)
         passwordEt = findViewById(R.id.password_et)
         registerBtn = findViewById(R.id.sign_up_btn)
@@ -39,10 +39,8 @@ class SingUpActivity : AppCompatActivity() {
         captchaInput = findViewById(R.id.captcha_input)
         refreshCaptchaBtn = findViewById(R.id.refresh_captcha_btn)
 
-        // Генерация первой капчи
         generateCaptcha()
 
-        // Обновление капчи
         refreshCaptchaBtn.setOnClickListener {
             generateCaptcha()
         }
@@ -54,27 +52,25 @@ class SingUpActivity : AppCompatActivity() {
             val userCaptcha = captchaInput.text.toString()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Поля не должны быть пустыми.Заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            // Проверка капчи (теперь всегда)
+
             if (userCaptcha != currentCaptcha) {
-                Toast.makeText(this, "Неверная капча", Toast.LENGTH_SHORT).show()
-                generateCaptcha() // Генерируем новую капчу
-                return@setOnClickListener // Не продолжаем авторизацию
+                Toast.makeText(this, "Неверная капча, попробуйте еще раз", Toast.LENGTH_SHORT).show()
+                generateCaptcha()
+                return@setOnClickListener
             }
 
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Сохраняем имя пользователя в Firebase
                         val user = auth.currentUser
                         val profileUpdates = UserProfileChangeRequest.Builder()
                             .setDisplayName(username)
                             .build()
                         user?.updateProfile(profileUpdates)
 
-                        // Проверка на админа
                         if (email.contains("adminrole")) {
                             startActivity(Intent(this, Admin::class.java))
                         } else {
@@ -87,7 +83,7 @@ class SingUpActivity : AppCompatActivity() {
                             "Ошибка: ${task.exception?.message}",
                             Toast.LENGTH_SHORT
                         ).show()
-                        generateCaptcha() // Новая капча при ошибке входа
+                        generateCaptcha()
                     }
                 }
         }
